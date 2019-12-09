@@ -82,14 +82,14 @@ class Disk {
 
     @Override
     public String toString(){
-        String s = "{";
+        StringBuilder s = new StringBuilder("{");
         Node actual = root;
 
         for(int i = 0; i < 26; i++){
-            s += i + ": (" + actual.name + " <-> " + actual.connection.name + ") | ";
+            s.append(i).append(": (").append(actual.name).append(" <-> ").append(actual.connection.name).append(") | ");
             actual = actual.next;
         }
 
-        return s;
+        return s.toString();
     }
 }

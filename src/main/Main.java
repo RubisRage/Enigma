@@ -14,29 +14,6 @@ public class Main {
 
         t.start();
     }
-
-    private static String help(){
-
-        String s = "EHRVXGAOBQUSIMZFLYNWKTPDJC";
-        String res = "{";
-
-        for(int i = 0; i < s.length(); i++) {
-            res += Enigma.letterToNum(s.charAt(i)) + ", ";
-        }
-
-        return res.substring(0, res.length()-2) + "}";
-    }
-
-    private static String helpReflector(){
-        String s = "{";
-
-        for(int i = 0; i < 26; i++){
-            s += i + ", ";
-        }
-
-
-        return s.substring(0, s.length()-2) + "}";
-    }
 }
 
 class EnigmaWindow extends JFrame {
@@ -45,7 +22,7 @@ class EnigmaWindow extends JFrame {
 
     private Enigma enigma = new Enigma();
 
-    public EnigmaWindow(){
+    EnigmaWindow(){
 
         super("Enigma");
 
@@ -107,7 +84,13 @@ class EnigmaWindow extends JFrame {
     class Reset implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            enigma = enigma.restore();
+            try {
+                enigma = enigma.restore();
+            } catch(NullPointerException e){
+                JOptionPane.showMessageDialog(EnigmaWindow.this, "Please, select a configurati"
+                        + "on before restoring", "No configuration selected", JOptionPane.WARNING_MESSAGE);
+                new SettingsWindow();
+            }
         }
     }
 
@@ -208,7 +191,7 @@ class EnigmaWindow extends JFrame {
                 int p2 = Integer.parseInt(rotor2_INIT.getText());
                 int p3 = Integer.parseInt(rotor3_INIT.getText());
 
-                enigma.setWirings(s1, p1, s2, p2, s3, p3);
+                enigma.setWiring(s1, p1, s2, p2, s3, p3);
 
 
                 EnigmaWindow.this.setEnabled(true);

@@ -1,8 +1,5 @@
 package main;
 
-
-import java.awt.image.renderable.RenderableImageOp;
-
 class Enigma {
 
     private static int[][] pairs = new int[][]{{0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24},
@@ -23,7 +20,7 @@ class Enigma {
         reflector = new Reflector(pairs);
     }
 
-    Enigma(int[] first_wiring, int first_position, int[] second_wiring, int second_position, int[] third_wiring,
+    private Enigma(int[] first_wiring, int first_position, int[] second_wiring, int second_position, int[] third_wiring,
            int third_position, int[][] pairs){
         first = new Rotor(first_wiring, first_position);
         wiring1 = first_wiring;
@@ -46,11 +43,7 @@ class Enigma {
             if(numberedLetter == -1) return "String no válida";
             else if(letterToNum(s.charAt(i)) == 26)encoded.append(" ");
             else {
-                try{
-                    encoded.append(encode(letterToNum(s.charAt(i))));
-                } catch(NullPointerException e){
-                    throw  e;
-                }
+                encoded.append(encode(letterToNum(s.charAt(i))));
             }
         }
 
@@ -58,12 +51,7 @@ class Enigma {
     }
 
     private char encode(int letter) throws NullPointerException{
-        int front = 0;
-        try{
-            front = reflector.findPair(third.frontEncode(second.frontEncode(first.frontEncode(letter))));
-        } catch(NullPointerException e){
-            throw e;
-        }
+        int front = reflector.findPair(third.frontEncode(second.frontEncode(first.frontEncode(letter))));
         char encoded = numToLetter(first.backEncode(second.backEncode(third.backEncode(front))));
 
         first.rotate();
@@ -77,8 +65,9 @@ class Enigma {
         return encoded;
     }
 
-    void setWirings(String first_wiring, int first_position, String second_wiring, int second_position, String third_wiring,
-                    int third_position){
+    @SuppressWarnings("DuplicatedCode")
+    void setWiring(String first_wiring, int first_position, String second_wiring, int second_position, String third_wiring,
+                   int third_position){
         switch (first_wiring) {
             case "SWISSK I":
                 first = new Rotor(SWISSK_I, first_position);
@@ -131,9 +120,9 @@ class Enigma {
         init[2] = third_position;
     }
 
-    void setPlugboard(){
-
-    }
+//    void setPlugboard(){
+//
+//    }
 
     Enigma restore(){
 
@@ -175,7 +164,7 @@ class Enigma {
         return 'Ñ';
     }
 
-    static int letterToNum(char letter){
+    private static int letterToNum(char letter){
 
         switch(letter){
             case 'A': return 0;
