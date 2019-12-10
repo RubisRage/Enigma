@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args){
 
         Thread t = new Thread(EnigmaWindow::new);
-
         t.start();
     }
 }
@@ -167,16 +166,15 @@ class EnigmaWindow extends JFrame {
             settingsCP.add(acceptPane, BorderLayout.SOUTH);
 
 
-            addWindowListener(new Restore());
-            setVisible(true);
-        }
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    EnigmaWindow.this.setEnabled(true);
+                    dispose();
+                }
+            });
 
-        class Restore extends WindowAdapter{
-            @Override
-            public void windowClosing(WindowEvent e) {
-                EnigmaWindow.this.setEnabled(true);
-                dispose();
-            }
+            setVisible(true);
         }
 
         class AcceptSettings implements ActionListener{

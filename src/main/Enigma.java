@@ -2,13 +2,13 @@ package main;
 
 class Enigma {
 
-    private static int[][] pairs = new int[][]{{0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24},
+     private static int[][] pairs = new int[][]{{0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24},
             {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25}};
-    private static final int[]  SWISSK_I = new int[]{15, 4, 25, 20, 14, 7, 23, 18, 2, 21,  5, 12, 19,  1,  6, 11, 17,
+     private static final int[]  SWISSK_I = new int[]{15, 4, 25, 20, 14, 7, 23, 18, 2, 21,  5, 12, 19,  1,  6, 11, 17,
             8, 13, 16,  9, 22,  0, 24,  3, 10};
-    private static final int[] SWISSK_II = new int[]{15, 4, 25, 20, 14, 7, 23, 18, 2, 21,  5, 12, 19,  1,  6, 11, 17, 8,
+     private static final int[] SWISSK_II = new int[]{15, 4, 25, 20, 14, 7, 23, 18, 2, 21,  5, 12, 19,  1,  6, 11, 17, 8,
             13, 16,  9, 22,  0, 24,  3, 10};
-    private static final int[] SWISSK_III = new int[]{4, 7, 17, 21, 23, 6, 0, 14, 1, 16, 20, 18,  8, 12, 25,  5, 11, 24,
+     private static final int[] SWISSK_III = new int[]{4, 7, 17, 21, 23, 6, 0, 14, 1, 16, 20, 18,  8, 12, 25,  5, 11, 24,
             13, 22, 10, 19, 15,  3,  9, 2};
 
     private Rotor first, second, third;
@@ -21,7 +21,7 @@ class Enigma {
     }
 
     private Enigma(int[] first_wiring, int first_position, int[] second_wiring, int second_position, int[] third_wiring,
-           int third_position, int[][] pairs){
+                   int third_position, int[][] pairs){
         first = new Rotor(first_wiring, first_position);
         wiring1 = first_wiring;
         init[0] = first_position;
